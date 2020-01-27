@@ -1,0 +1,6 @@
+framework module Pods_ActionsDemo {
+  umbrella header "Pods-ActionsDemo-umbrella.h"
+
+  export *
+  module * { export * }
+}
