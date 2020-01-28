@@ -1,0 +1,23 @@
+name: Unit Tests
+
+on: [pull_request]
+
+jobs:
+  tests:
+
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/cache@v1
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gem-
+    - name: Install Bundler & Gems
+      run: gem install bundler && bundle install
+    - name: Run fastlane tests
+      env:
+        XCODE_PATH: "/Applications/Xcode_11.3.app"
+        DEVELOPER_DIR: "/Applications/Xcode_11.3.app/Contents/Developer"
+      run: fastlane test
