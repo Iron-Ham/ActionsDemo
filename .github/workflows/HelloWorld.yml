@@ -1,0 +1,14 @@
+name: HelloWorld
+
+on: [pull_request]
+
+jobs:
+  build:
+    if: contains(github.event.pull_request.labels.*.name, 'WIP')
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Hello
+      run: echo 'Hello World'
